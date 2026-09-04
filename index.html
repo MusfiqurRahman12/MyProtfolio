@@ -900,39 +900,42 @@
 
     /* Contact & Footer Section */
     .contact-section {
-      padding: 120px 0 80px 0;
+      min-height: 100vh;
+      margin-top: 108px;
+      padding: 180px 0 24px 0;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: flex-end;
     }
 
     .contact-title {
-      font-size: clamp(38px, 5.2vw, 68px);
+      font-size: clamp(34px, 4.6vw, 62px);
       font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.04em;
+      line-height: 1.12;
+      letter-spacing: -0.035em;
       color: #ffffff;
       max-width: 800px;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
     }
 
     .contact-desc {
-      font-size: 17px;
+      font-size: 16px;
       color: var(--text-muted);
       max-width: 560px;
-      line-height: 1.6;
-      margin-bottom: 40px;
+      line-height: 1.55;
+      margin-bottom: 28px;
     }
 
     .contact-actions-row {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
       flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 60px;
+      margin-bottom: 36px;
     }
 
     .btn-contact-primary {
@@ -980,7 +983,7 @@
     /* Footer Meta Bar */
     footer {
       width: 100%;
-      padding-top: 40px;
+      padding-top: 28px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       justify-content: space-between;
@@ -1221,7 +1224,7 @@
     <!-- Project Showcase Grid: Row 1 -->
     <section class="showcase-grid" id="projects">
       <a href="https://github.com/MusfiqurRahman12/ai-test-case-generator" target="_blank" rel="noopener noreferrer" class="showcase-card">
-        <img src="assets/card-ai.jpg" alt="AI Test Case Generator with Trello, Jira and ClickUp Sync" loading="lazy">
+        <img src="assets/card-ai.webp" onerror="this.onerror=null;this.src='assets/card-ai.jpg'" alt="AI Test Case Generator with Trello, Jira and ClickUp Sync" loading="lazy">
         <div class="card-caption">
           <span class="card-tag">AI & QA Tool</span>
           <h3 class="card-title">AI Test Case Generator</h3>
@@ -1230,7 +1233,7 @@
       </a>
 
       <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="showcase-card">
-        <img src="assets/card-security.jpg" alt="Accelvia Content Protection WordPress Plugin" loading="lazy">
+        <img src="assets/card-security.webp" onerror="this.onerror=null;this.src='assets/card-security.jpg'" alt="Accelvia Content Protection WordPress Plugin" loading="lazy">
         <div class="card-caption">
           <span class="card-tag">WordPress Plugin</span>
           <h3 class="card-title">Accelvia Protection</h3>
@@ -1239,7 +1242,7 @@
       </a>
 
       <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="showcase-card">
-        <img src="assets/card-medical.jpg" alt="Surgery South Patient Management Automation" loading="lazy">
+        <img src="assets/card-medical.webp" onerror="this.onerror=null;this.src='assets/card-medical.jpg'" alt="Surgery South Patient Management Automation" loading="lazy">
         <div class="card-caption">
           <span class="card-tag">E2E Automation</span>
           <h3 class="card-title">Surgery South</h3>
@@ -1251,7 +1254,7 @@
     <!-- Project Showcase Grid: Row 2 (More Selected Work) -->
     <section class="showcase-grid" style="margin-top: 0; margin-bottom: 120px;">
       <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="showcase-card">
-        <img src="assets/card-condosales.jpg" alt="Condosales Real Estate API & Load Testing" loading="lazy">
+        <img src="assets/card-condosales.webp" onerror="this.onerror=null;this.src='assets/card-condosales.jpg'" alt="Condosales Real Estate API & Load Testing" loading="lazy">
         <div class="card-caption">
           <span class="card-tag">API & Performance QA</span>
           <h3 class="card-title">Condosales Platform</h3>
@@ -1260,7 +1263,7 @@
       </a>
 
       <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="showcase-card">
-        <img src="assets/card-sixthrio.jpg" alt="Sixth & Rio Luxury Residential Platform QA" loading="lazy">
+        <img src="assets/card-sixthrio.webp" onerror="this.onerror=null;this.src='assets/card-sixthrio.jpg'" alt="Sixth & Rio Luxury Residential Platform QA" loading="lazy">
         <div class="card-caption">
           <span class="card-tag">Pixel-Perfect QA</span>
           <h3 class="card-title">Sixth & Rio Platform</h3>
@@ -1269,7 +1272,7 @@
       </a>
 
       <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="showcase-card">
-        <img src="assets/card-cta.jpg" alt="Accelvia CTA Builder WordPress Plugin" loading="lazy">
+        <img src="assets/card-cta.webp" onerror="this.onerror=null;this.src='assets/card-cta.jpg'" alt="Accelvia CTA Builder WordPress Plugin" loading="lazy">
         <div class="card-caption">
           <span class="card-tag">WordPress Plugin</span>
           <h3 class="card-title">Accelvia CTA Builder</h3>
@@ -1530,7 +1533,9 @@
       const loaderText = document.getElementById('loader-text');
 
       const images = new Array(TOTAL_FRAMES);
-      let loadedCount = 0;
+      // 0: unrequested, 1: loading, 2: loaded, 3: error
+      const loadingState = new Uint8Array(TOTAL_FRAMES);
+
       let targetProgress = 0;
       let currentProgress = 0;
       let lastRenderedFrame = -1;
@@ -1541,6 +1546,58 @@
         return `protfolio-images/ezgif-frame-${frameNum}.jpg`;
       }
 
+      // Generate keyframe indices (spaced every 10 frames + endpoint) for instant scrub track
+      const KEYFRAME_STEP = 10;
+      const keyframes = [];
+      for (let i = 0; i < TOTAL_FRAMES; i += KEYFRAME_STEP) {
+        keyframes.push(i);
+      }
+      if (keyframes[keyframes.length - 1] !== TOTAL_FRAMES - 1) {
+        keyframes.push(TOTAL_FRAMES - 1);
+      }
+      const TOTAL_KEYFRAMES = keyframes.length;
+      let keyframesLoaded = 0;
+
+      // Request an individual frame with deduplication
+      function requestFrame(index, onComplete) {
+        if (index < 0 || index >= TOTAL_FRAMES) return;
+        if (loadingState[index] !== 0) {
+          if (onComplete && loadingState[index] >= 2) onComplete();
+          return;
+        }
+
+        loadingState[index] = 1;
+        const img = new Image();
+        img.src = getFrameSrc(index);
+
+        img.onload = () => {
+          loadingState[index] = 2;
+          images[index] = img;
+          const currentFrame = Math.round(currentProgress * (TOTAL_FRAMES - 1));
+          if (currentFrame === index) {
+            drawFrame(index);
+          }
+          if (onComplete) onComplete();
+        };
+
+        img.onerror = () => {
+          loadingState[index] = 3;
+          if (onComplete) onComplete();
+        };
+      }
+
+      // Priority loading for frames within active scroll window
+      function prioritizeNear(frameIndex) {
+        const radius = 8;
+        const start = Math.max(0, frameIndex - radius);
+        const end = Math.min(TOTAL_FRAMES - 1, frameIndex + radius);
+        for (let i = start; i <= end; i++) {
+          if (loadingState[i] === 0) {
+            requestFrame(i);
+          }
+        }
+      }
+
       // Calculate scroll progress from window.scrollY
       function updateScrollProgress() {
         const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
@@ -1549,6 +1606,8 @@
           document.documentElement.scrollHeight - window.innerHeight
         );
         targetProgress = Math.min(Math.max(scrollTop / maxScroll, 0), 1);
+        const activeFrame = Math.round(targetProgress * (TOTAL_FRAMES - 1));
+        prioritizeNear(activeFrame);
       }
 
       window.addEventListener('scroll', updateScrollProgress, { passive: true });
@@ -1579,12 +1638,12 @@
 
       window.addEventListener('resize', resize);
 
-      // Draw requested frame preserving aspect ratio (cover mode)
+      // Draw requested frame preserving aspect ratio (cover mode) with bidirectional fallback
       function drawFrame(frameIndex) {
         const clampedIndex = Math.min(Math.max(frameIndex, 0), TOTAL_FRAMES - 1);
         let img = images[clampedIndex];
 
-        // Fallback to nearest loaded frame if specific frame is pending
+        // Fallback to nearest loaded frame if specific frame is still loading
         if (!img || !img.complete || img.naturalWidth === 0) {
           for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
             const before = clampedIndex - offset;
@@ -1649,59 +1708,73 @@
       function dismissPreloader() {
         if (preloaderDismissed) return;
         preloaderDismissed = true;
-        preloader.classList.add('fade-out');
-        setTimeout(() => {
-          if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
-        }, 800);
-      }
-
-      function updateLoaderUI() {
-        const percent = Math.floor((loadedCount / TOTAL_FRAMES) * 100);
-        loaderBarFill.style.width = percent + '%';
-        loaderText.textContent = `LOADING ${percent}%`;
-
-        if (loadedCount >= TOTAL_FRAMES) {
-          dismissPreloader();
+        if (preloader) {
+          preloader.classList.add('fade-out');
+          setTimeout(() => {
+            if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
+          }, 600);
         }
       }
 
-      // Preload image sequence
-      function startPreloading() {
-        const firstImg = new Image();
-        firstImg.src = getFrameSrc(0);
-        images[0] = firstImg;
+      // Background progressive backfill with controlled concurrency
+      let bgIndex = 0;
+      const MAX_CONCURRENT_BG = 4;
+      let activeBgRequests = 0;
+      let bgLoaderStarted = false;
 
-        firstImg.onload = () => {
-          loadedCount++;
-          updateLoaderUI();
+      function pumpBackgroundQueue() {
+        while (activeBgRequests < MAX_CONCURRENT_BG && bgIndex < TOTAL_FRAMES) {
+          const idx = bgIndex++;
+          if (loadingState[idx] === 0) {
+            activeBgRequests++;
+            requestFrame(idx, () => {
+              activeBgRequests--;
+              pumpBackgroundQueue();
+            });
+          }
+        }
+      }
+
+      function startBackgroundLoader() {
+        if (bgLoaderStarted) return;
+        bgLoaderStarted = true;
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(() => pumpBackgroundQueue(), { timeout: 800 });
+        } else {
+          setTimeout(pumpBackgroundQueue, 150);
+        }
+      }
+
+      // Preload Stage 1: First frame (instant hero) & Stage 2: Keyframe scrub track
+      function startPreloading() {
+        // Step 1: Render first frame as fast as possible
+        requestFrame(0, () => {
           resize();
           drawFrame(0);
+        });
 
-          // Preload remaining frames
-          for (let i = 1; i < TOTAL_FRAMES; i++) {
-            const img = new Image();
-            img.src = getFrameSrc(i);
-            img.onload = () => {
-              loadedCount++;
-              updateLoaderUI();
-              if (Math.round(currentProgress * (TOTAL_FRAMES - 1)) === i) {
-                drawFrame(i);
-              }
-            };
-            img.onerror = () => {
-              loadedCount++;
-              updateLoaderUI();
-            };
-            images[i] = img;
-          }
-        };
+        // Step 2: Load keyframe sequence for the preloader track
+        let finished = 0;
+        keyframes.forEach((frameIdx) => {
+          requestFrame(frameIdx, () => {
+            finished++;
+            keyframesLoaded++;
+            const percent = Math.min(100, Math.floor((finished / TOTAL_KEYFRAMES) * 100));
+            if (loaderBarFill) loaderBarFill.style.width = percent + '%';
+            if (loaderText) loaderText.textContent = `LOADING ${percent}%`;
 
-        firstImg.onerror = () => {
-          console.error('Failed to load first image');
+            if (finished >= TOTAL_KEYFRAMES) {
+              dismissPreloader();
+              startBackgroundLoader();
+            }
+          });
+        });
+
+        // Safety fallback: dismiss preloader after 1.5s max to guarantee immediate usability
+        setTimeout(() => {
           dismissPreloader();
-        };
-
-        setTimeout(dismissPreloader, 2500);
+          startBackgroundLoader();
+        }, 1500);
       }
 
       // Dynamic Title Rotator between SQA Engineer & AI Solution Architect
