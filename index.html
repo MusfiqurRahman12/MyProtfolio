@@ -747,6 +747,145 @@
       line-height: 1.55;
     }
 
+    /* Project Leadership & Management Impact Spotlight */
+    .project-impact-banner {
+      margin-top: 48px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 94, 58, 0.28);
+      border-radius: 32px;
+      padding: 48px 44px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .project-impact-banner::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 94, 58, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .impact-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .impact-role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 94, 58, 0.12);
+      border: 1px solid rgba(255, 94, 58, 0.32);
+      color: var(--accent);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .impact-title {
+      font-size: clamp(24px, 2.8vw, 36px);
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+    }
+
+    .impact-subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    .impact-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+
+    .impact-stat-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 22px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .impact-stat-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 94, 58, 0.35);
+      background: rgba(255, 94, 58, 0.04);
+    }
+
+    .impact-stat-num {
+      font-size: clamp(30px, 3vw, 42px);
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+    }
+
+    .impact-stat-num .accent-sign {
+      color: var(--accent);
+    }
+
+    .impact-stat-label {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .impact-stat-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .impact-footer-note {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      flex-wrap: wrap;
+    }
+
+    .impact-footer-text {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.78);
+      max-width: 680px;
+      line-height: 1.6;
+    }
+
+    .impact-footer-text strong {
+      color: #ffffff;
+    }
+
     /* 3-Card Project Showcase Gallery */
     .showcase-grid {
       display: grid;
@@ -1250,6 +1389,13 @@
         padding: 32px 28px;
         gap: 24px;
       }
+      .impact-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .project-impact-banner {
+        padding: 36px 28px;
+      }
       .skills-grid, .certs-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -1260,6 +1406,9 @@
 
     @media (max-width: 640px) {
       .services-grid {
+        grid-template-columns: 1fr;
+      }
+      .impact-stats-grid {
         grid-template-columns: 1fr;
       }
       .skills-grid, .certs-grid {
@@ -1353,19 +1502,19 @@
       <div class="hero-services-grid">
         <a href="#services" class="service-item">
           <div class="service-num">#01</div>
-          <div class="service-title">AI & Test Automation ↗</div>
+          <div class="service-title">Web & CMS Development ↗</div>
         </a>
         <a href="#services" class="service-item">
           <div class="service-num">#02</div>
-          <div class="service-title">API & Performance Testing ↗</div>
+          <div class="service-title">3D, 2D & Motion Graphics ↗</div>
         </a>
         <a href="#services" class="service-item">
           <div class="service-num">#03</div>
-          <div class="service-title">UI & Cross-Browser QA ↗</div>
+          <div class="service-title">AI & SQA Automation ↗</div>
         </a>
         <a href="#services" class="service-item">
           <div class="service-num">#04</div>
-          <div class="service-title">Project Coordination ↗</div>
+          <div class="service-title">Project Leadership (2.5k+ Hrs) ↗</div>
         </a>
       </div>
     </section>
@@ -1439,13 +1588,181 @@
     <!-- "Services I Provide" Section -->
     <section class="services-section" id="services">
       <div class="section-header">
-        <span class="section-tag">Services & Solutions</span>
+        <span class="section-tag">Services & Capabilities</span>
         <h2 class="section-title">Services I Provide</h2>
-        <p class="section-subtitle">Comprehensive quality engineering, intelligent AI test automation, and agile technical leadership tailored for scaling web, cloud, and mobile platforms.</p>
+        <p class="section-subtitle">Full-spectrum technical solutions spanning modern web development, custom CMS & plugin engineering, 3D/2D motion design, digital marketing, and automated AI test engineering.</p>
       </div>
 
       <div class="services-grid">
-        <!-- 01 AI & QA Solution Architecture -->
+        <!-- 01 Web Development & CMS Solutions -->
+        <div class="service-card">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6"/>
+                  <polyline points="8 6 2 12 8 18"/>
+                  <line x1="14" y1="4" x2="10" y2="20"/>
+                </svg>
+              </div>
+              <span class="service-card-num">01</span>
+            </div>
+            <h3 class="service-card-title">Web Development & CMS</h3>
+            <p class="service-card-desc">Building fast, secure, and modern web applications and custom CMS architectures tailored for high conversion, clean maintainability, and responsiveness.</p>
+            <ul class="service-features-list">
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Custom Web Apps (HTML5, CSS3, Modern JS, Node.js)</span>
+              </li>
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>WordPress Custom Themes, Gutenberg & Headless CMS</span>
+              </li>
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Core Web Vitals Speed & Performance Optimization</span>
+              </li>
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Pixel-Perfect Responsive Layouts & Cross-Browser Parity</span>
+              </li>
+            </ul>
+          </div>
+          <div class="service-pills-wrap">
+            <span class="service-tech-pill">Web Development</span>
+            <span class="service-tech-pill">WordPress</span>
+            <span class="service-tech-pill">Headless CMS</span>
+            <span class="service-tech-pill">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- 02 Custom Plugin & Extension Engineering -->
+        <div class="service-card">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+              </div>
+              <span class="service-card-num">02</span>
+            </div>
+            <h3 class="service-card-title">Custom Plugin & Tool Engineering</h3>
+            <p class="service-card-desc">Engineering proprietary WordPress plugins, modular extensions, and secure third-party API integrations with lightweight, high-security codebases.</p>
+            <ul class="service-features-list">
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>WordPress Plugin Development (e.g., Accelvia Protection)</span>
+              </li>
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Custom API Integrations (Stripe, PayPal, Jira, ClickUp)</span>
+              </li>
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Source Code Shielding & Anti-Inspection Security</span>
+              </li>
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Custom Shortcodes, REST Endpoints & Admin Panels</span>
+              </li>
+            </ul>
+          </div>
+          <div class="service-pills-wrap">
+            <span class="service-tech-pill">WordPress Plugins</span>
+            <span class="service-tech-pill">PHP / JS</span>
+            <span class="service-tech-pill">Custom APIs</span>
+            <span class="service-tech-pill">Security</span>
+          </div>
+        </div>
+
+        <!-- 03 3D, 2D & Motion Graphics -->
+        <div class="service-card">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                  <line x1="12" y1="22.08" x2="12" y2="12"/>
+                </svg>
+              </div>
+              <span class="service-card-num">03</span>
+            </div>
+            <h3 class="service-card-title">3D, 2D & Motion Graphics</h3>
+            <p class="service-card-desc">Producing interactive 3D WebGL experiences, frame-scrubbed canvas animations, and sleek 2D vector motion that captivate visitors and drive engagement.</p>
+            <ul class="service-features-list">
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Interactive 3D Canvas & WebGL Animation Sequencing</span>
+              </li>
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>2D Motion Graphics, Vector Asset Design & Visual FX</span>
+              </li>
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Scroll-Driven Storytelling & UI Micro-Interactions</span>
+              </li>
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Dynamic Asset Compression & 60 FPS Render Optimization</span>
+              </li>
+            </ul>
+          </div>
+          <div class="service-pills-wrap">
+            <span class="service-tech-pill">3D Canvas</span>
+            <span class="service-tech-pill">WebGL</span>
+            <span class="service-tech-pill">2D Motion</span>
+            <span class="service-tech-pill">Micro-Interactions</span>
+          </div>
+        </div>
+
+        <!-- 04 Digital Marketing & Growth Strategy -->
+        <div class="service-card">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="20" x2="18" y2="10"/>
+                  <line x1="12" y1="20" x2="12" y2="4"/>
+                  <line x1="6" y1="20" x2="6" y2="14"/>
+                  <polyline points="2 6 7 2 12 7 17 3 22 8"/>
+                </svg>
+              </div>
+              <span class="service-card-num">04</span>
+            </div>
+            <h3 class="service-card-title">Digital Marketing & Growth</h3>
+            <p class="service-card-desc">Executing data-driven marketing strategies, technical SEO, and conversion optimization to boost search visibility and maximize return on ad spend.</p>
+            <ul class="service-features-list">
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Technical & On-Page SEO (Schema, Indexing, Metadata)</span>
+              </li>
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Conversion Rate Optimization (CRO) & Funnel Testing</span>
+              </li>
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Google Analytics 4, Tag Manager & Event Tracking</span>
+              </li>
+              <li>
+                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Performance Marketing & Cross-Platform Ad Strategy</span>
+              </li>
+            </ul>
+          </div>
+          <div class="service-pills-wrap">
+            <span class="service-tech-pill">Digital Marketing</span>
+            <span class="service-tech-pill">Technical SEO</span>
+            <span class="service-tech-pill">CRO</span>
+            <span class="service-tech-pill">GA4 Analytics</span>
+          </div>
+        </div>
+
+        <!-- 05 AI & SQA Test Automation -->
         <div class="service-card">
           <div>
             <div class="service-card-top">
@@ -1456,201 +1773,38 @@
                   <path d="M9 18v4M15 18v4"/>
                 </svg>
               </div>
-              <span class="service-card-num">01</span>
+              <span class="service-card-num">05</span>
             </div>
-            <h3 class="service-card-title">AI & QA Solution Architecture</h3>
-            <p class="service-card-desc">Designing custom AI agents and LLM-assisted workflows to accelerate test scenario generation and sync testing workflows seamlessly with project boards.</p>
+            <h3 class="service-card-title">AI & SQA Test Automation</h3>
+            <p class="service-card-desc">Architecting AI-driven quality pipelines and comprehensive Playwright, Selenium, and Appium automated test suites for continuous regression protection.</p>
             <ul class="service-features-list">
               <li>
                 <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>AI-Powered Test Case & Scenario Generation</span>
+                <span>AI-Powered Test Case Generation (Jira & ClickUp Sync)</span>
               </li>
               <li>
                 <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Jira, Trello & ClickUp Automated Card Sync</span>
+                <span>Playwright & Selenium Frameworks (Python & JavaScript)</span>
               </li>
               <li>
                 <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Intelligent Defect Triaging & Anomaly Detection</span>
+                <span>Appium Mobile Automation (iOS & Android Test Suites)</span>
               </li>
               <li>
                 <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Prompt Engineering for Specialized QA Models</span>
+                <span>Apache JMeter Load Simulation & Postman API Verification</span>
               </li>
             </ul>
           </div>
           <div class="service-pills-wrap">
             <span class="service-tech-pill">AI Automation</span>
-            <span class="service-tech-pill">LLM Prompting</span>
-            <span class="service-tech-pill">Python</span>
-            <span class="service-tech-pill">Jira API</span>
-          </div>
-        </div>
-
-        <!-- 02 Full-Stack Test Automation -->
-        <div class="service-card">
-          <div>
-            <div class="service-card-top">
-              <div class="service-icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="4 17 10 11 4 5"/>
-                  <line x1="12" y1="19" x2="20" y2="19"/>
-                </svg>
-              </div>
-              <span class="service-card-num">02</span>
-            </div>
-            <h3 class="service-card-title">Full-Stack Test Automation</h3>
-            <p class="service-card-desc">Architecting robust, scalable test automation suites using Playwright, Selenium, and Appium that integrate directly into continuous deployment pipelines.</p>
-            <ul class="service-features-list">
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Playwright & Selenium Frameworks (Python/JS)</span>
-              </li>
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Appium Mobile Automation (iOS & Android)</span>
-              </li>
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Page Object Model (POM) Modular Architecture</span>
-              </li>
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>CI/CD Automated Test Execution & Reporting</span>
-              </li>
-            </ul>
-          </div>
-          <div class="service-pills-wrap">
             <span class="service-tech-pill">Playwright</span>
             <span class="service-tech-pill">Selenium</span>
             <span class="service-tech-pill">Appium</span>
-            <span class="service-tech-pill">CI/CD</span>
           </div>
         </div>
 
-        <!-- 03 API & Performance Testing -->
-        <div class="service-card">
-          <div>
-            <div class="service-card-top">
-              <div class="service-icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                </svg>
-              </div>
-              <span class="service-card-num">03</span>
-            </div>
-            <h3 class="service-card-title">API & Performance Testing</h3>
-            <p class="service-card-desc">Exhaustive functional and stress testing of backend endpoints, microservices, and database layers to guarantee high-concurrency stability and speed.</p>
-            <ul class="service-features-list">
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Postman Collections & RestAssured Automation</span>
-              </li>
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Apache JMeter Stress, Spike & Load Simulation</span>
-              </li>
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>REST & SOAP Protocol Payload Validation</span>
-              </li>
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Database Query Verification & SQL Testing</span>
-              </li>
-            </ul>
-          </div>
-          <div class="service-pills-wrap">
-            <span class="service-tech-pill">Postman</span>
-            <span class="service-tech-pill">JMeter</span>
-            <span class="service-tech-pill">RestAssured</span>
-            <span class="service-tech-pill">SQL</span>
-          </div>
-        </div>
-
-        <!-- 04 Cross-Browser & Pixel-Perfect QA -->
-        <div class="service-card">
-          <div>
-            <div class="service-card-top">
-              <div class="service-icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                  <line x1="8" y1="21" x2="16" y2="21"/>
-                  <line x1="12" y1="17" x2="12" y2="21"/>
-                </svg>
-              </div>
-              <span class="service-card-num">04</span>
-            </div>
-            <h3 class="service-card-title">Cross-Browser & Visual QA</h3>
-            <p class="service-card-desc">Ensuring pristine visual presentation, responsive fidelity, and smooth user interactions across every modern browser, operating system, and viewport.</p>
-            <ul class="service-features-list">
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Cloud Testing across 100+ Devices on BrowserStack</span>
-              </li>
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Pixel-Perfect Design Comparison (Figma to Code)</span>
-              </li>
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Responsive Breakpoints & Touch UI Verification</span>
-              </li>
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Usability & Accessibility (WCAG / a11y) Checks</span>
-              </li>
-            </ul>
-          </div>
-          <div class="service-pills-wrap">
-            <span class="service-tech-pill">BrowserStack</span>
-            <span class="service-tech-pill">PerfectPixel</span>
-            <span class="service-tech-pill">Responsive QA</span>
-            <span class="service-tech-pill">WCAG</span>
-          </div>
-        </div>
-
-        <!-- 05 Security & Content Shielding -->
-        <div class="service-card">
-          <div>
-            <div class="service-card-top">
-              <div class="service-icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-              </div>
-              <span class="service-card-num">05</span>
-            </div>
-            <h3 class="service-card-title">Security & Content Shielding</h3>
-            <p class="service-card-desc">Hardening digital platforms and web products against code theft, unauthorized inspection, scraping bots, and common front-end vulnerabilities.</p>
-            <ul class="service-features-list">
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Front-End Source Code & Asset Protection</span>
-              </li>
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>WordPress Security Plugin Development</span>
-              </li>
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>OWASP Top 10 Vulnerability Assessment</span>
-              </li>
-              <li>
-                <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Anti-Inspection & Content Scraping Prevention</span>
-              </li>
-            </ul>
-          </div>
-          <div class="service-pills-wrap">
-            <span class="service-tech-pill">App Security</span>
-            <span class="service-tech-pill">Content Shielding</span>
-            <span class="service-tech-pill">WP Security</span>
-            <span class="service-tech-pill">Vulnerability QA</span>
-          </div>
-        </div>
-
-        <!-- 06 Agile QA Consulting & PMP® Delivery -->
+        <!-- 06 Project Coordination & Delivery (Assistant Manager) -->
         <div class="service-card">
           <div>
             <div class="service-card-top">
@@ -1662,51 +1816,105 @@
               </div>
               <span class="service-card-num">06</span>
             </div>
-            <h3 class="service-card-title">QA Consulting & PMP® Delivery</h3>
-            <p class="service-card-desc">Providing high-level QA strategy, test governance, sprint coordination, and risk management backed by global PMP® certified project methodologies.</p>
+            <h3 class="service-card-title">Project Coordination & Delivery</h3>
+            <p class="service-card-desc">End-to-end technical sprint coordination and assistant management overseeing multi-disciplinary engineering, motion graphics, and marketing teams.</p>
             <ul class="service-features-list">
               <li>
                 <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Master Test Plan & Quality Roadmap Design</span>
+                <span>2,500+ Hours of Technical Work Coordinated & Delivered</span>
               </li>
               <li>
                 <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Agile Sprint Planning & Cross-Team Governance</span>
+                <span>$37,500+ Project Value Managed ($15/hr minimum baseline)</span>
               </li>
               <li>
                 <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Defect Metrics, Root-Cause Analysis & SLA Tracking</span>
+                <span>Agile / Scrum Sprint Orchestration & Backlog Governance</span>
               </li>
               <li>
                 <svg class="service-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Zero-Downtime Release Readiness Sign-Off</span>
+                <span>Risk Management, Transparent Reporting & PMP® Methods</span>
               </li>
             </ul>
           </div>
           <div class="service-pills-wrap">
-            <span class="service-tech-pill">PMP® Certified</span>
-            <span class="service-tech-pill">Agile / Scrum</span>
-            <span class="service-tech-pill">QA Strategy</span>
-            <span class="service-tech-pill">Release Management</span>
+            <span class="service-tech-pill">Project Coordinator</span>
+            <span class="service-tech-pill">Assistant Manager</span>
+            <span class="service-tech-pill">PMP® Trained</span>
+            <span class="service-tech-pill">Agile Delivery</span>
           </div>
         </div>
       </div>
 
-      <!-- Services Section Bottom CTA Banner -->
-      <div class="services-cta-banner">
-        <div class="services-cta-text">
-          <h4>Have a complex project that needs battle-tested quality?</h4>
-          <p>Whether you need custom automation frameworks, AI-driven testing, or full QA strategy oversight, let’s discuss how I can help your team launch with 100% confidence.</p>
+      <!-- Spotlight Banner: Project Leadership & Financial Scale by the Numbers -->
+      <div class="project-impact-banner">
+        <div class="impact-header">
+          <div>
+            <div class="impact-role-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="8.5" cy="7" r="4"/>
+                <polyline points="17 11 19 13 23 9"/>
+              </svg>
+              <span>Project Coordinator & Assistant Manager</span>
+            </div>
+            <h3 class="impact-title">Leadership & Financial Scale by the Numbers</h3>
+            <p class="impact-subtitle">Demonstrated ability to coordinate cross-functional engineering, CMS development, motion design, and marketing sprints while maintaining strict budget discipline and on-time delivery.</p>
+          </div>
+          <a href="#contact" class="btn-pill-orange">
+            <span>Hire For Your Project</span>
+            <span class="arrow-icon-circle">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </span>
+          </a>
         </div>
-        <a href="#contact" class="btn-pill-orange">
-          <span>Let's Talk Quality</span>
-          <span class="arrow-icon-circle">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="7" y1="17" x2="17" y2="7"></line>
-              <polyline points="7 7 17 7 17 17"></polyline>
-            </svg>
-          </span>
-        </a>
+
+        <div class="impact-stats-grid">
+          <div class="impact-stat-card">
+            <div class="impact-stat-num">
+              <span>2,500</span><span class="accent-sign">+</span>
+            </div>
+            <div class="impact-stat-label">Workable Hours Managed</div>
+            <div class="impact-stat-desc">Directly coordinated across web, QA, motion graphics, and marketing teams as Project Coordinator & Assistant Manager.</div>
+          </div>
+
+          <div class="impact-stat-card">
+            <div class="impact-stat-num">
+              <span class="accent-sign">$</span><span>37,500</span><span class="accent-sign">+</span>
+            </div>
+            <div class="impact-stat-label">Total Project Value Delivered</div>
+            <div class="impact-stat-desc">Cumulative production value successfully managed and executed at a minimum baseline rate of $15/hr.</div>
+          </div>
+
+          <div class="impact-stat-card">
+            <div class="impact-stat-num">
+              <span class="accent-sign">$</span><span>15</span><span style="font-size: 0.6em; margin: 0 4px; color: var(--text-dim);">–</span><span class="accent-sign">$</span><span>35</span><span style="font-size: 0.45em; color: var(--text-dim); margin-left: 4px;">/HR</span>
+            </div>
+            <div class="impact-stat-label">Managed Rate Spectrum</div>
+            <div class="impact-stat-desc">Proven oversight of diverse development, design, and automation talent tiers with transparent billing.</div>
+          </div>
+
+          <div class="impact-stat-card">
+            <div class="impact-stat-num">
+              <span>100</span><span class="accent-sign">%</span>
+            </div>
+            <div class="impact-stat-label">Milestone Accountability</div>
+            <div class="impact-stat-desc">Zero scope drift, disciplined sprint velocity, and clear stakeholder status visibility at every development stage.</div>
+          </div>
+        </div>
+
+        <div class="impact-footer-note">
+          <p class="impact-footer-text">
+            <strong>What this means for your business:</strong> As an Assistant Manager and Project Coordinator, I don't just write code or run test cases—I take complete ownership of delivery. Over <strong>2,500+ workable hours</strong> and <strong>$37,500+ in production budget</strong> have been entrusted to my coordination, ensuring complex digital initiatives launch on time, on budget, and with zero-defect quality.
+          </p>
+          <a href="mailto:musfiqurrahmansqa@gmail.com" class="btn-contact-outline" style="padding: 10px 22px; font-size: 13.5px;">
+            <span>Contact Musfiqur</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
       </div>
     </section>
 
