@@ -1,0 +1,10 @@
+{
+  "name": "musfiqur-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Musfiqur Rahman - SQA Engineer, AI Solution Architect, Consultant, PMP Portfolio",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  }
+}
