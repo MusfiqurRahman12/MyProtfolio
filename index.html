@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Musfiqur Rahman — SQA Engineer, AI Solution Architect & Consultant</title>
+  <meta name="description" content="Personal portfolio of Musfiqur Rahman — SQA Engineer, AI Solution Architect, and Consultant specializing in test automation, quality assurance, and AI solutions.">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --accent: #FF5E3A;
+      --accent-hover: #FF7252;
+      --bg: #000000;
+      --text-main: #FFFFFF;
+      --text-muted: rgba(255, 255, 255, 0.65);
+      --text-dim: rgba(255, 255, 255, 0.45);
+      --glass-bg: rgba(18, 18, 18, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-hover: rgba(255, 255, 255, 0.12);
+      --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      overflow-x: hidden;
+      overflow-y: scroll;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+      scroll-behavior: smooth;
+    }
+
+    html::-webkit-scrollbar {
+      width: 6px;
+    }
+    html::-webkit-scrollbar-track {
+      background: #000;
+    }
+    html::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 3px;
+    }
+
+    body {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--bg);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Fixed Canvas Background Animation */
+    #canvas-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Ambient dynamic overlay to guarantee crisp text legibility over any frame */
+    #ambient-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.35) 0%,
+        rgba(0, 0, 0, 0.15) 20%,
+        rgba(0, 0, 0, 0.45) 50%,
+        rgba(0, 0, 0, 0.75) 80%,
+        rgba(0, 0, 0, 0.92) 100%
+      );
+    }
+
+    /* Page Content Wrapper */
+    #page-content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+      pointer-events: auto;
+    }
+
+    /* Preloader */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: #000000;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
+      pointer-events: none;
+    }
+
+    #preloader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-bar-bg {
+      width: 180px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .loader-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(255, 94, 58, 0.8);
+      border-radius: 999px;
+      transition: width 0.1s ease-out;
+    }
+
+    .loader-text {
+      margin-top: 12px;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Navigation Bar */
+    header {
+      width: 100%;
+      padding: 32px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .logo-dot {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    /* Primary Pill Button (White pill with orange arrow badge) */
+    .btn-pill-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #ffffff;
+      color: #0d0d0d;
+      text-decoration: none;
+      padding: 6px 6px 6px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-pill-white:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-pill-white .arrow-icon-circle {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-pill-white:hover .arrow-icon-circle {
+      transform: rotate(45deg);
+    }
+
+    /* Hero Section - Text positioned at the bottom part */
+    .hero-section {
+      min-height: calc(100vh - 100px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-top: 80px;
+      padding-bottom: 50px;
+      gap: 48px;
+    }
+
+    .hero-top-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      align-items: flex-end;
+      gap: 40px;
+    }
+
+    .hero-left-col .salutation {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-left-col .main-title {
+      font-size: clamp(60px, 7.5vw, 102px);
+      font-weight: 800;
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+      text-transform: capitalize;
+    }
+
+    .title-rotator {
+      position: relative;
+      display: inline-block;
+      min-height: 1.95em;
+      width: 100%;
+    }
+
+    .title-item {
+      display: block;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .title-item.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      position: relative;
+    }
+
+    .hero-dual-tags {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .hero-mini-tag {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .hero-mini-dot {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .hero-right-col {
+      padding-left: 20px;
+      max-width: 440px;
+      justify-self: end;
+      padding-bottom: 8px;
+    }
+
+    .hero-right-col .philosophy-title {
+      font-size: clamp(22px, 2.3vw, 28px);
+      font-weight: 600;
+      line-height: 1.28;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-right-col .philosophy-desc {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-top: 14px;
+    }
+
+    /* 4-column Services Row */
+    .hero-services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      padding-top: 36px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 0;
+    }
+
+    .service-item .service-num {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+
+    .service-item .service-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    /* Brands Banner Card */
+    .brands-banner {
+      width: 100%;
+      background: var(--glass-bg);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid var(--glass-border);
+      border-radius: 36px;
+      padding: 34px 50px;
+      margin: 80px 0 120px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .brands-heading {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      max-width: 170px;
+      line-height: 1.45;
+    }
+
+    .brands-list {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .brand-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      opacity: 0.9;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .brand-item:hover {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    .brand-item svg {
+      color: #ffffff;
+    }
+
+    /* Section General Header */
+    .section-header {
+      margin-bottom: 48px;
+    }
+
+    .section-tag {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: block;
+      letter-spacing: -0.01em;
+    }
+
+    .section-title {
+      font-size: clamp(34px, 4.2vw, 54px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-top: 14px;
+      max-width: 580px;
+      line-height: 1.6;
+    }
+
+    /* "Behind the Quality" Section */
+    .behind-section {
+      padding: 40px 0 60px 0;
+    }
+
+    .behind-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: flex-start;
+    }
+
+    .behind-tag {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: block;
+      letter-spacing: -0.01em;
+    }
+
+    .behind-headline {
+      font-size: clamp(38px, 4.8vw, 58px);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+      color: #ffffff;
+    }
+
+    .behind-right-col {
+      padding-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .behind-statement {
+      font-size: clamp(18px, 1.8vw, 22px);
+      line-height: 1.55;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.88);
+      letter-spacing: -0.015em;
+    }
+
+    .behind-cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .behind-cta-subtext {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    /* Orange Pill Button */
+    .btn-pill-orange {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--accent);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 7px 8px 7px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 24px rgba(255, 94, 58, 0.35);
+      cursor: pointer;
+    }
+
+    .btn-pill-orange:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(255, 94, 58, 0.5);
+    }
+
+    .btn-pill-orange .arrow-icon-circle {
+      width: 28px;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.22);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-pill-orange:hover .arrow-icon-circle {
+      transform: rotate(45deg);
+    }
+
+    /* 3-Card Project Showcase Gallery */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin: 40px 0 60px 0;
+    }
+
+    .showcase-card {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      border-radius: 30px;
+      overflow: hidden;
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+
+    .showcase-card:hover {
+      transform: translateY(-8px) scale(1.015);
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.2);
+    }
+
+    .showcase-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .showcase-card:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Glass Caption for Project Cards */
+    .card-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 30px 24px 24px 24px;
+      background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 60%, rgba(0, 0, 0, 0.95) 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      pointer-events: none;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* =======================================================
+       NEW SECTIONS: WORK EXPERIENCE, SKILLS, CERTS, CONTACT
+       ======================================================= */
+
+    /* Experience Section */
+    .experience-section {
+      padding: 100px 0 60px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .experience-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .exp-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 36px 40px;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .exp-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--glass-hover);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .exp-role-company {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .exp-role {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .exp-company {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .exp-period {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dim);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 6px 14px;
+      border-radius: 999px;
+      letter-spacing: 0.02em;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .exp-bullets li {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .exp-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* Skills & Tools Section */
+    .skills-section {
+      padding: 100px 0 60px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .skill-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--glass-hover);
+    }
+
+    .skill-icon-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(255, 94, 58, 0.12);
+      border: 1px solid rgba(255, 94, 58, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+
+    .skill-cat-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .skill-pills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-pill {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 5px 11px;
+      border-radius: 999px;
+      transition: all 0.2s ease;
+    }
+
+    .skill-pill:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Certifications & Education Section */
+    .certs-section {
+      padding: 100px 0 60px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .cert-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 30px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .cert-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--glass-hover);
+    }
+
+    .cert-top {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cert-issuer {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .cert-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.35;
+    }
+
+    .cert-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Education Block */
+    .education-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .edu-card {
+      background: rgba(14, 14, 14, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 22px;
+      padding: 28px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .edu-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .edu-degree {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .edu-inst {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .edu-year {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-dim);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 5px 12px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    /* Contact & Footer Section */
+    .contact-section {
+      padding: 120px 0 80px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contact-title {
+      font-size: clamp(38px, 5.2vw, 68px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+      max-width: 800px;
+      margin-bottom: 20px;
+    }
+
+    .contact-desc {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 560px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .contact-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 60px;
+    }
+
+    .btn-contact-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--accent);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      box-shadow: 0 10px 30px rgba(255, 94, 58, 0.35);
+    }
+
+    .btn-contact-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 36px rgba(255, 94, 58, 0.5);
+    }
+
+    .btn-contact-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 12px 26px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+
+    .btn-contact-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Footer Meta Bar */
+    footer {
+      width: 100%;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-dim);
+      font-size: 13px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover {
+      color: #ffffff;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    /* Responsive Queries */
+    @media (max-width: 1024px) {
+      #page-content {
+        padding: 0 24px;
+      }
+      .hero-top-grid, .behind-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .hero-right-col {
+        padding-left: 0;
+        justify-self: start;
+        max-width: 100%;
+      }
+      .hero-services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+      .brands-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px 32px;
+      }
+      .brands-list {
+        gap: 28px;
+      }
+      .showcase-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .skills-grid, .certs-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .education-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .skills-grid, .certs-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Minimal Preloader -->
+  <div id="preloader">
+    <div class="loader-bar-bg">
+      <div id="loader-bar-fill" class="loader-bar-fill"></div>
+    </div>
+    <div id="loader-text" class="loader-text">LOADING 0%</div>
+  </div>
+
+  <!-- Background Canvas Scroll Animation -->
+  <div id="canvas-container">
+    <canvas id="animation-canvas"></canvas>
+  </div>
+
+  <!-- Ambient contrast overlay to ensure 100% readability -->
+  <div id="ambient-overlay"></div>
+
+  <!-- Foreground Content -->
+  <div id="page-content">
+
+    <!-- Top Navigation -->
+    <header>
+      <a href="#" class="logo">Musfiqur<span class="logo-dot">.</span></a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="https://www.linkedin.com/in/musfiqur-rahman-pro" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        </ul>
+
+        <a href="#contact" class="btn-pill-white">
+          <span>Get in touch</span>
+          <span class="arrow-icon-circle">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="hero-top-grid">
+        <div class="hero-left-col">
+          <p class="salutation">Hey, I'm an</p>
+          <h1 class="main-title">
+            <span class="title-rotator">
+              <span class="title-item active">SQA<br>Engineer</span>
+              <span class="title-item">AI Solution<br>Architect</span>
+              <span class="title-item">QA & AI<br>Consultant</span>
+            </span>
+          </h1>
+          <div class="hero-dual-tags">
+            <span class="hero-mini-tag">SQA Engineer</span>
+            <span class="hero-mini-dot">·</span>
+            <span class="hero-mini-tag">AI Solution Architect</span>
+            <span class="hero-mini-dot">·</span>
+            <span class="hero-mini-tag">Consultant</span>
+            <span class="hero-mini-dot">·</span>
+            <span class="hero-mini-tag">PMP®</span>
+          </div>
+        </div>
+
+        <div class="hero-right-col">
+          <h2 class="philosophy-title">Quality should feel invisible.</h2>
+          <p class="philosophy-desc">From AI solutions and automated testing to resilient architectures, I build systems that ensure digital products launch flawlessly.</p>
+        </div>
+      </div>
+
+      <!-- 4 Columns Service Highlights -->
+      <div class="hero-services-grid">
+        <div class="service-item">
+          <div class="service-num">#01</div>
+          <div class="service-title">AI & Test Automation</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">#02</div>
+          <div class="service-title">API & Performance Testing</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">#03</div>
+          <div class="service-title">UI & Cross-Browser QA</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">#04</div>
+          <div class="service-title">Project Coordination</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Companies / Teams Bar -->
+    <div class="brands-banner">
+      <div class="brands-heading">Companies & Teams I've Helped Scale</div>
+      <div class="brands-list">
+        <div class="brand-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="9"/>
+          </svg>
+          <span>Dynamicflow</span>
+        </div>
+
+        <div class="brand-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 3h12l-6 8 6 8H6l6-8-6-8z"/>
+          </svg>
+          <span>3 Tier Logic</span>
+        </div>
+
+        <div class="brand-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 3v18A9 9 0 0 0 12 3z" fill="currentColor"/>
+          </svg>
+          <span>AccelviaTeams</span>
+        </div>
+
+        <div class="brand-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2a10 10 0 0 0-7 17.14L19.14 5A9.95 9.95 0 0 0 12 2zm7 17.14A10 10 0 0 0 12 22a9.95 9.95 0 0 0 7.14-2.86z"/>
+          </svg>
+          <span>Surgery South</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- "Behind the Quality" Section -->
+    <section class="behind-section" id="about">
+      <div class="behind-grid">
+        <div class="behind-left-col">
+          <span class="behind-tag">Behind the Quality</span>
+          <h2 class="behind-headline">
+            Shaping<br>Reliability That<br>Makes Life Simpler
+          </h2>
+        </div>
+
+        <div class="behind-right-col">
+          <p class="behind-statement">
+            I'm an SQA Engineer, AI Solution Architect, and Consultant specializing in AI-driven test case generation, Playwright & Selenium automation, and seamless API validation across web and mobile platforms.
+          </p>
+
+          <div class="behind-cta-group">
+            <span class="behind-cta-subtext">Let's Build Reliable Software Together</span>
+            <a href="mailto:musfiqurrahmansqa@gmail.com" class="btn-pill-orange">
+              <span>Get in touch</span>
+              <span class="arrow-icon-circle">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Showcase Grid: Row 1 -->
+    <section class="showcase-grid" id="projects">
+      <a href="https://github.com/MusfiqurRahman12/ai-test-case-generator" target="_blank" rel="noopener noreferrer" class="showcase-card">
+        <img src="assets/card-ai.jpg" alt="AI Test Case Generator with Trello, Jira and ClickUp Sync" loading="lazy">
+        <div class="card-caption">
+          <span class="card-tag">AI & QA Tool</span>
+          <h3 class="card-title">AI Test Case Generator</h3>
+          <p class="card-desc">AI-powered test generation with Trello, Jira & ClickUp sync</p>
+        </div>
+      </a>
+
+      <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="showcase-card">
+        <img src="assets/card-security.jpg" alt="Accelvia Content Protection WordPress Plugin" loading="lazy">
+        <div class="card-caption">
+          <span class="card-tag">WordPress Plugin</span>
+          <h3 class="card-title">Accelvia Protection</h3>
+          <p class="card-desc">Security plugin protecting source code & digital content</p>
+        </div>
+      </a>
+
+      <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="showcase-card">
+        <img src="assets/card-medical.jpg" alt="Surgery South Patient Management Automation" loading="lazy">
+        <div class="card-caption">
+          <span class="card-tag">E2E Automation</span>
+          <h3 class="card-title">Surgery South</h3>
+          <p class="card-desc">Automated test suite with Playwright & Selenium</p>
+        </div>
+      </a>
+    </section>
+
+    <!-- Project Showcase Grid: Row 2 (More Selected Work) -->
+    <section class="showcase-grid" style="margin-top: 0; margin-bottom: 120px;">
+      <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="showcase-card">
+        <img src="assets/card-condosales.jpg" alt="Condosales Real Estate API & Load Testing" loading="lazy">
+        <div class="card-caption">
+          <span class="card-tag">API & Performance QA</span>
+          <h3 class="card-title">Condosales Platform</h3>
+          <p class="card-desc">Postman, RestAssured & JMeter concurrent load benchmarks</p>
+        </div>
+      </a>
+
+      <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="showcase-card">
+        <img src="assets/card-sixthrio.jpg" alt="Sixth & Rio Luxury Residential Platform QA" loading="lazy">
+        <div class="card-caption">
+          <span class="card-tag">Pixel-Perfect QA</span>
+          <h3 class="card-title">Sixth & Rio Platform</h3>
+          <p class="card-desc">Comprehensive cross-browser, mobile & layout regression testing</p>
+        </div>
+      </a>
+
+      <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="showcase-card">
+        <img src="assets/card-cta.jpg" alt="Accelvia CTA Builder WordPress Plugin" loading="lazy">
+        <div class="card-caption">
+          <span class="card-tag">WordPress Plugin</span>
+          <h3 class="card-title">Accelvia CTA Builder</h3>
+          <p class="card-desc">Dynamic call-to-action banners & high-conversion UI buttons</p>
+        </div>
+      </a>
+    </section>
+
+    <!-- Professional Experience Timeline -->
+    <section class="experience-section" id="experience">
+      <div class="section-header">
+        <span class="section-tag">Career Journey</span>
+        <h2 class="section-title">Work Experience & Impact</h2>
+        <p class="section-subtitle">Nearly 4 years of proven excellence in test automation, quality assurance management, and cross-functional project coordination.</p>
+      </div>
+
+      <div class="experience-timeline">
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="exp-role-company">
+              <h3 class="exp-role">SQA Engineer & Project Coordinator</h3>
+              <span class="exp-company">Dynamicflow · Mirpur, Dhaka</span>
+            </div>
+            <span class="exp-period">2023 — Present</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Architected and executed automated test suites with Playwright and Selenium, achieving 80%+ test automation coverage.</li>
+            <li>Conducted comprehensive API testing with Postman, RestAssured, and SOAP APIs to ensure robust frontend & backend contracts.</li>
+            <li>Coordinated project communication across cross-functional engineering teams and international stakeholders.</li>
+          </ul>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="exp-role-company">
+              <h3 class="exp-role">QA Engineer (Contractual, Part-time)</h3>
+              <span class="exp-company">3 Tier Logic · Canada (Remote)</span>
+            </div>
+            <span class="exp-period">Apr 2023 — Feb 2025</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Conducted end-to-end API testing and validated integration endpoints for North American client platforms.</li>
+            <li>Monitored regression cycles and enforced strict software reliability standards across release pipelines.</li>
+          </ul>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="exp-role-company">
+              <h3 class="exp-role">Jr SQA Engineer</h3>
+              <span class="exp-company">Prep Digitals</span>
+            </div>
+            <span class="exp-period">2022 — 2023</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Formulated and executed detailed test plans, test scenarios, and bug tracking matrices for enterprise software delivery.</li>
+            <li>Conducted functional, sanity, regression, and cross-browser exploratory testing across multi-device environments.</li>
+            <li>Collaborated closely with developers and product managers to meet exact client business requirements.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Skills & Tools Matrix -->
+    <section class="skills-section" id="skills">
+      <div class="section-header">
+        <span class="section-tag">Core Competencies</span>
+        <h2 class="section-title">Technical Skills & Tooling</h2>
+        <p class="section-subtitle">Hands-on expertise across modern testing frameworks, API verification tools, and agile delivery environments.</p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+            </svg>
+          </div>
+          <h3 class="skill-cat-title">Test Automation</h3>
+          <div class="skill-pills-wrap">
+            <span class="skill-pill">Playwright</span>
+            <span class="skill-pill">Selenium</span>
+            <span class="skill-pill">Appium Mobile</span>
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">JavaScript</span>
+            <span class="skill-pill">Node.js</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </div>
+          <h3 class="skill-cat-title">API & Performance</h3>
+          <div class="skill-pills-wrap">
+            <span class="skill-pill">Postman</span>
+            <span class="skill-pill">RestAssured</span>
+            <span class="skill-pill">Apache JMeter</span>
+            <span class="skill-pill">SOAP API</span>
+            <span class="skill-pill">Load Testing</span>
+            <span class="skill-pill">SQL Testing</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <h3 class="skill-cat-title">UI & QA Strategy</h3>
+          <div class="skill-pills-wrap">
+            <span class="skill-pill">Manual Testing</span>
+            <span class="skill-pill">BrowserStack</span>
+            <span class="skill-pill">PerfectPixel</span>
+            <span class="skill-pill">Regression QA</span>
+            <span class="skill-pill">Usability</span>
+            <span class="skill-pill">TestRail</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M16.5 9.4 7.55 4.24a1.78 1.78 0 0 0-2.5 1.55v12.42a1.78 1.78 0 0 0 2.5 1.55L16.5 14.6a1.78 1.78 0 0 0 0-3.2z"/>
+            </svg>
+          </div>
+          <h3 class="skill-cat-title">Workflow & PM</h3>
+          <div class="skill-pills-wrap">
+            <span class="skill-pill">Jira</span>
+            <span class="skill-pill">Trello</span>
+            <span class="skill-pill">ClickUp</span>
+            <span class="skill-pill">Git / GitHub</span>
+            <span class="skill-pill">Figma / XD</span>
+            <span class="skill-pill">WordPress</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Professional Credentials & Education -->
+    <section class="certs-section" id="credentials">
+      <div class="section-header">
+        <span class="section-tag">Credentials & Education</span>
+        <h2 class="section-title">Certifications & Academic Background</h2>
+        <p class="section-subtitle">Globally recognised project management qualifications and specialized test engineering certifications.</p>
+      </div>
+
+      <div class="certs-grid">
+        <div class="cert-card">
+          <div class="cert-top">
+            <span class="cert-issuer">PMI (USA)</span>
+            <h3 class="cert-name">PMP® Certified</h3>
+            <p class="cert-desc">Project Management Professional credential covering predictive and adaptive project methodologies.</p>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-top">
+            <span class="cert-issuer">PMI (USA)</span>
+            <h3 class="cert-name">PMI Agile® Project Management</h3>
+            <p class="cert-desc">Certified agile practitioner credential focused on rapid sprint cycles and adaptive team delivery.</p>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-top">
+            <span class="cert-issuer">Road to SDET</span>
+            <h3 class="cert-name">Advanced Automation Testing</h3>
+            <p class="cert-desc">End-to-end framework engineering with Selenium, Playwright, CI/CD integration, and design patterns.</p>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-top">
+            <span class="cert-issuer">Bug Resistance</span>
+            <h3 class="cert-name">Software Quality Assurance</h3>
+            <p class="cert-desc">Comprehensive test case architecture, defect life cycle handling, and boundary-value verification.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education Row -->
+      <div class="education-grid">
+        <div class="edu-card">
+          <div class="edu-left">
+            <h4 class="edu-degree">Bachelor of Science in Information & Technology</h4>
+            <span class="edu-inst">Lovely Professional University · India</span>
+          </div>
+          <span class="edu-year">2018 — 2022</span>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-left">
+            <h4 class="edu-degree">PGD in Human Resource Management</h4>
+            <span class="edu-inst">Bangladesh Institute of Management</span>
+          </div>
+          <span class="edu-year">2024 — 2025</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Call to Action -->
+    <section class="contact-section" id="contact">
+      <span class="section-tag" style="margin-bottom: 20px;">Get In Touch</span>
+      <h2 class="contact-title">Let's Build Reliable Software Together.</h2>
+      <p class="contact-desc">
+        Have an upcoming product release, automation initiative, or enterprise testing challenge? Let's connect and ensure your software launches without compromise.
+      </p>
+
+      <div class="contact-actions-row">
+        <a href="mailto:musfiqurrahmansqa@gmail.com" class="btn-contact-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span>musfiqurrahmansqa@gmail.com</span>
+        </a>
+
+        <a href="https://www.linkedin.com/in/musfiqur-rahman-pro" target="_blank" rel="noopener noreferrer" class="btn-contact-outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.44a1.62 1.62 0 1 0 1.62 1.62c0-.9-.73-1.62-1.62-1.62z"/>
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+
+        <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="btn-contact-outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+
+      <!-- Footer Bottom -->
+      <footer>
+        <p>© 2026 Musfiqur Rahman · SQA Engineer, AI Solution Architect & Consultant. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#home">Back to Top ↑</a>
+          <span>Dhaka, Bangladesh</span>
+        </div>
+      </footer>
+    </section>
+
+  </div>
+
+  <script>
+    (function () {
+      const TOTAL_FRAMES = 300;
+      const canvas = document.getElementById('animation-canvas');
+      const ctx = canvas.getContext('2d', { alpha: false });
+      const preloader = document.getElementById('preloader');
+      const loaderBarFill = document.getElementById('loader-bar-fill');
+      const loaderText = document.getElementById('loader-text');
+
+      const images = new Array(TOTAL_FRAMES);
+      let loadedCount = 0;
+      let targetProgress = 0;
+      let currentProgress = 0;
+      let lastRenderedFrame = -1;
+      let preloaderDismissed = false;
+
+      function getFrameSrc(index) {
+        const frameNum = String(index + 1).padStart(3, '0');
+        return `protfolio images/ezgif-frame-${frameNum}.jpg`;
+      }
+
+      // Calculate scroll progress from window.scrollY
+      function updateScrollProgress() {
+        const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+        const maxScroll = Math.max(
+          1,
+          document.documentElement.scrollHeight - window.innerHeight
+        );
+        targetProgress = Math.min(Math.max(scrollTop / maxScroll, 0), 1);
+      }
+
+      window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
+      // Canvas sizing with high DPI
+      let canvasW = 0;
+      let canvasH = 0;
+      let dpr = 1;
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvasW = window.innerWidth;
+        canvasH = window.innerHeight;
+
+        canvas.width = Math.floor(canvasW * dpr);
+        canvas.height = Math.floor(canvasH * dpr);
+        canvas.style.width = canvasW + 'px';
+        canvas.style.height = canvasH + 'px';
+
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+
+        updateScrollProgress();
+        drawFrame(Math.round(currentProgress * (TOTAL_FRAMES - 1)));
+      }
+
+      window.addEventListener('resize', resize);
+
+      // Draw requested frame preserving aspect ratio (cover mode)
+      function drawFrame(frameIndex) {
+        const clampedIndex = Math.min(Math.max(frameIndex, 0), TOTAL_FRAMES - 1);
+        let img = images[clampedIndex];
+
+        // Fallback to nearest loaded frame if specific frame is pending
+        if (!img || !img.complete || img.naturalWidth === 0) {
+          for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
+            const before = clampedIndex - offset;
+            const after = clampedIndex + offset;
+            if (before >= 0 && images[before] && images[before].complete && images[before].naturalWidth > 0) {
+              img = images[before];
+              break;
+            }
+            if (after < TOTAL_FRAMES && images[after] && images[after].complete && images[after].naturalWidth > 0) {
+              img = images[after];
+              break;
+            }
+          }
+        }
+
+        if (!img || !img.complete || img.naturalWidth === 0) return;
+
+        const imgRatio = img.naturalWidth / img.naturalHeight;
+        const canvasRatio = canvasW / canvasH;
+
+        let renderW, renderH, renderX, renderY;
+
+        // Cover mode: edge-to-edge crisp presentation
+        if (canvasRatio > imgRatio) {
+          renderW = canvasW;
+          renderH = canvasW / imgRatio;
+          renderX = 0;
+          renderY = (canvasH - renderH) / 2;
+        } else {
+          renderH = canvasH;
+          renderW = canvasH * imgRatio;
+          renderX = (canvasW - renderW) / 2;
+          renderY = 0;
+        }
+
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, canvasW, canvasH);
+        ctx.drawImage(img, renderX, renderY, renderW, renderH);
+      }
+
+      // Smooth Animation Loop using LERP (Linear Interpolation)
+      function renderLoop() {
+        const diff = targetProgress - currentProgress;
+        
+        // Fluid interpolation dampening
+        if (Math.abs(diff) > 0.0001) {
+          currentProgress += diff * 0.12;
+        } else {
+          currentProgress = targetProgress;
+        }
+
+        const frameIndex = Math.round(currentProgress * (TOTAL_FRAMES - 1));
+        if (frameIndex !== lastRenderedFrame) {
+          drawFrame(frameIndex);
+          lastRenderedFrame = frameIndex;
+        }
+
+        requestAnimationFrame(renderLoop);
+      }
+
+      // Preloader dismissal
+      function dismissPreloader() {
+        if (preloaderDismissed) return;
+        preloaderDismissed = true;
+        preloader.classList.add('fade-out');
+        setTimeout(() => {
+          if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
+        }, 800);
+      }
+
+      function updateLoaderUI() {
+        const percent = Math.floor((loadedCount / TOTAL_FRAMES) * 100);
+        loaderBarFill.style.width = percent + '%';
+        loaderText.textContent = `LOADING ${percent}%`;
+
+        if (loadedCount >= TOTAL_FRAMES) {
+          dismissPreloader();
+        }
+      }
+
+      // Preload image sequence
+      function startPreloading() {
+        const firstImg = new Image();
+        firstImg.src = getFrameSrc(0);
+        images[0] = firstImg;
+
+        firstImg.onload = () => {
+          loadedCount++;
+          updateLoaderUI();
+          resize();
+          drawFrame(0);
+
+          // Preload remaining frames
+          for (let i = 1; i < TOTAL_FRAMES; i++) {
+            const img = new Image();
+            img.src = getFrameSrc(i);
+            img.onload = () => {
+              loadedCount++;
+              updateLoaderUI();
+              if (Math.round(currentProgress * (TOTAL_FRAMES - 1)) === i) {
+                drawFrame(i);
+              }
+            };
+            img.onerror = () => {
+              loadedCount++;
+              updateLoaderUI();
+            };
+            images[i] = img;
+          }
+        };
+
+        firstImg.onerror = () => {
+          console.error('Failed to load first image');
+          dismissPreloader();
+        };
+
+        setTimeout(dismissPreloader, 2500);
+      }
+
+      // Dynamic Title Rotator between SQA Engineer & AI Solution Architect
+      (function setupTitleRotator() {
+        const items = document.querySelectorAll('.title-item');
+        if (items.length < 2) return;
+        let activeIdx = 0;
+        setInterval(() => {
+          items[activeIdx].classList.remove('active');
+          activeIdx = (activeIdx + 1) % items.length;
+          items[activeIdx].classList.add('active');
+        }, 3400);
+      })();
+
+      // Initialize
+      resize();
+      startPreloading();
+      renderLoop();
+    })();
+  </script>
+</body>
+</html>
