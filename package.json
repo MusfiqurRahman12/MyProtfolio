@@ -4,6 +4,7 @@
   "private": true,
   "description": "Musfiqur Rahman - SQA Engineer, AI Solution Architect, Consultant, PMP Portfolio",
   "scripts": {
+    "build": "echo 'Static build ready'",
     "start": "node server.js",
     "dev": "node server.js"
   }
