@@ -629,12 +629,13 @@
       -webkit-backdrop-filter: blur(28px);
       border: 1px solid var(--glass-border);
       border-radius: 36px;
-      padding: 34px 50px;
+      padding: 30px 48px;
       margin: 80px 0 120px 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 32px;
+      gap: 36px;
+      overflow: hidden;
     }
 
     .brands-heading {
@@ -643,13 +644,40 @@
       color: var(--text-muted);
       max-width: 170px;
       line-height: 1.45;
+      flex-shrink: 0;
+      letter-spacing: -0.01em;
     }
 
-    .brands-list {
+    .brands-marquee-wrapper {
+      position: relative;
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+    }
+
+    .brands-track {
       display: flex;
       align-items: center;
       gap: 48px;
-      flex-wrap: wrap;
+      width: max-content;
+      animation: brandsMarquee 26s linear infinite;
+      will-change: transform;
+    }
+
+    .brands-marquee-wrapper:hover .brands-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes brandsMarquee {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     .brand-item {
@@ -660,8 +688,11 @@
       font-weight: 700;
       letter-spacing: -0.02em;
       color: #ffffff;
-      opacity: 0.9;
+      opacity: 0.88;
+      white-space: nowrap;
+      flex-shrink: 0;
       transition: opacity 0.2s ease, transform 0.2s ease;
+      cursor: default;
     }
 
     .brand-item:hover {
@@ -671,6 +702,7 @@
 
     .brand-item svg {
       color: #ffffff;
+      flex-shrink: 0;
     }
 
     /* Section General Header */
@@ -1123,33 +1155,167 @@
       color: #ffffff;
     }
 
-    /* 3-Card Project Showcase Gallery */
-    .showcase-grid {
+    /* =======================================================
+       INTERACTIVE SHUFFLING GALLERY FOR PROJECTS
+       ======================================================= */
+    .projects-gallery-section {
+      padding: 60px 0 70px 0;
+      position: relative;
+    }
+
+    .projects-gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 32px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .projects-gallery-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .gallery-filter-tabs {
+      display: inline-flex;
+      background: rgba(18, 18, 18, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      padding: 5px;
+      gap: 4px;
+    }
+
+    .filter-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-tab:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .filter-tab.active {
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    }
+
+    .filter-count {
+      font-size: 11px;
+      opacity: 0.65;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .filter-tab.active .filter-count {
+      background: var(--accent);
+      color: #ffffff;
+      opacity: 1;
+    }
+
+    .gallery-shuffle-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .gallery-shuffle-btn:hover {
+      background: rgba(255, 94, 58, 0.15);
+      border-color: rgba(255, 94, 58, 0.5);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .gallery-shuffle-btn svg {
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-shuffle-btn:hover svg {
+      transform: rotate(180deg);
+    }
+
+    /* Grid Layout */
+    .projects-gallery-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      margin: 40px 0 60px 0;
+      gap: 24px;
+      transition: all 0.4s ease;
     }
 
-    .showcase-card {
+    .gallery-card {
       position: relative;
-      aspect-ratio: 3 / 4;
-      border-radius: 30px;
+      border-radius: 24px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
       overflow: hidden;
-      background: #111111;
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
-      cursor: pointer;
-      text-decoration: none;
-      display: block;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.4s ease,
+                  border-color 0.3s ease,
+                  opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 1;
+      transform: scale(1) translateY(0);
     }
 
-    .showcase-card:hover {
-      transform: translateY(-8px) scale(1.015);
-      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.2);
+    .gallery-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 94, 58, 0.4);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 94, 58, 0.25);
     }
 
-    .showcase-card img {
+    .gallery-card.is-shuffling {
+      opacity: 0.5;
+      transform: scale(0.96) translateY(4px);
+    }
+
+    .gallery-card.is-hidden {
+      display: none;
+      opacity: 0;
+      transform: scale(0.92) translateY(16px);
+    }
+
+    .gallery-card-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9.5;
+      overflow: hidden;
+      background: #0d0d0d;
+    }
+
+    .gallery-card-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -1157,43 +1323,112 @@
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .showcase-card:hover img {
-      transform: scale(1.04);
+    .gallery-card:hover .gallery-card-media img {
+      transform: scale(1.05);
     }
 
-    /* Glass Caption for Project Cards */
-    .card-caption {
+    .gallery-card-media::after {
+      content: '';
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 30px 24px 24px 24px;
-      background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 60%, rgba(0, 0, 0, 0.95) 100%);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.65) 100%);
       pointer-events: none;
     }
 
-    .card-tag {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
+    .gallery-card-badge-row {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 2;
     }
 
-    .card-title {
+    .gallery-cat-badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--accent);
+      border: 1px solid rgba(255, 94, 58, 0.35);
+      padding: 4px 11px;
+      border-radius: 999px;
+    }
+
+    .gallery-card-info {
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .gallery-card-main {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .gallery-card-title {
       font-size: 18px;
       font-weight: 700;
       color: #ffffff;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
     }
 
-    .card-desc {
-      font-size: 13px;
+    .gallery-card-desc {
+      font-size: 13.5px;
       color: var(--text-muted);
-      line-height: 1.4;
+      line-height: 1.5;
+    }
+
+    .gallery-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .card-action-btn {
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 6px 14px;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-action-btn.primary {
+      background: rgba(255, 94, 58, 0.15);
+      border: 1px solid rgba(255, 94, 58, 0.35);
+      color: var(--accent);
+    }
+
+    .card-action-btn.primary:hover {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(255, 94, 58, 0.35);
+    }
+
+    .card-action-btn.outline {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .card-action-btn.outline:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      transform: translateY(-2px);
     }
 
     /* =======================================================
@@ -1612,12 +1847,15 @@
         padding: 28px 32px;
         gap: 20px;
       }
-      .brands-list {
-        gap: 28px;
+      .brands-marquee-wrapper {
+        width: 100%;
       }
-      .showcase-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
+      .brands-track {
+        gap: 36px;
+      }
+      .projects-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
       }
       .services-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1659,8 +1897,14 @@
       .nav-right {
         gap: 14px;
       }
-      .showcase-card {
-        aspect-ratio: 16 / 11;
+      .projects-gallery-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+      .projects-gallery-controls {
+        width: 100%;
+        justify-content: space-between;
       }
     }
 
@@ -1747,11 +1991,13 @@
       .brands-heading {
         font-size: 12px;
       }
-      .brands-list {
-        gap: 16px 24px;
-      }
       .brand-item {
-        font-size: 14.5px;
+        font-size: 15px;
+        gap: 10px;
+      }
+      .brand-item svg {
+        width: 18px;
+        height: 18px;
       }
 
       /* Section Common Header */
@@ -1902,27 +2148,24 @@
         justify-content: center;
       }
 
-      /* Showcase Project Cards */
-      .showcase-grid {
+      /* Projects Gallery Grid */
+      .projects-gallery-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
-        margin: 24px 0 36px 0;
+        gap: 18px;
+        margin: 20px 0 36px 0;
       }
-      .showcase-card {
-        aspect-ratio: 4 / 3;
-        border-radius: 20px;
+      .gallery-filter-tabs {
+        flex-wrap: wrap;
+        border-radius: 18px;
       }
-      .card-caption {
-        padding: 20px 18px 14px 18px;
+      .gallery-card-info {
+        padding: 18px 20px;
       }
-      .card-tag {
-        font-size: 10.5px;
+      .gallery-card-title {
+        font-size: 16.5px;
       }
-      .card-title {
-        font-size: 16px;
-      }
-      .card-desc {
-        font-size: 12.5px;
+      .gallery-card-desc {
+        font-size: 13px;
       }
 
       /* Experience Section */
@@ -2308,35 +2551,114 @@
 
     <!-- Companies / Teams Bar -->
     <div class="brands-banner">
-      <div class="brands-heading">Companies & Teams I've Helped Scale</div>
-      <div class="brands-list">
-        <div class="brand-item">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <circle cx="12" cy="12" r="9"/>
-          </svg>
-          <span>Dynamicflow</span>
-        </div>
+      <div class="brands-heading" id="brands-heading">Companies & Teams I've Helped Scale</div>
+      <div class="brands-marquee-wrapper">
+        <div class="brands-track" id="brands-track">
+          <!-- Primary Group -->
+          <div class="brand-item">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="9"/>
+              <circle cx="12" cy="12" r="3" fill="currentColor"/>
+            </svg>
+            <span>Dynamicflow</span>
+          </div>
 
-        <div class="brand-item">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M6 3h12l-6 8 6 8H6l6-8-6-8z"/>
-          </svg>
-          <span>3 Tier Logic</span>
-        </div>
+          <div class="brand-item">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6 3h12l-6 8 6 8H6l6-8-6-8z"/>
+            </svg>
+            <span>3 Tier Logic</span>
+          </div>
 
-        <div class="brand-item">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M12 3v18A9 9 0 0 0 12 3z" fill="currentColor"/>
-          </svg>
-          <span>AccelviaTeams</span>
-        </div>
+          <div class="brand-item">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 3v18A9 9 0 0 0 12 3z" fill="currentColor"/>
+            </svg>
+            <span>AccelviaTeams</span>
+          </div>
 
-        <div class="brand-item">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2a10 10 0 0 0-7 17.14L19.14 5A9.95 9.95 0 0 0 12 2zm7 17.14A10 10 0 0 0 12 22a9.95 9.95 0 0 0 7.14-2.86z"/>
-          </svg>
-          <span>Surgery South</span>
+          <div class="brand-item">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2a10 10 0 0 0-7 17.14L19.14 5A9.95 9.95 0 0 0 12 2zm7 17.14A10 10 0 0 0 12 22a9.95 9.95 0 0 0 7.14-2.86z"/>
+            </svg>
+            <span>Surgery South</span>
+          </div>
+
+          <div class="brand-item">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            <span>Prep Digitals</span>
+          </div>
+
+          <div class="brand-item">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="4"/>
+              <path d="M3 9h18M9 21V9"/>
+            </svg>
+            <span>Condosales</span>
+          </div>
+
+          <div class="brand-item">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            <span>Sixth &amp; Rio</span>
+          </div>
+
+          <!-- Secondary Group (Duplicate for seamless infinite loop) -->
+          <div class="brand-item" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="9"/>
+              <circle cx="12" cy="12" r="3" fill="currentColor"/>
+            </svg>
+            <span>Dynamicflow</span>
+          </div>
+
+          <div class="brand-item" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6 3h12l-6 8 6 8H6l6-8-6-8z"/>
+            </svg>
+            <span>3 Tier Logic</span>
+          </div>
+
+          <div class="brand-item" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 3v18A9 9 0 0 0 12 3z" fill="currentColor"/>
+            </svg>
+            <span>AccelviaTeams</span>
+          </div>
+
+          <div class="brand-item" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2a10 10 0 0 0-7 17.14L19.14 5A9.95 9.95 0 0 0 12 2zm7 17.14A10 10 0 0 0 12 22a9.95 9.95 0 0 0 7.14-2.86z"/>
+            </svg>
+            <span>Surgery South</span>
+          </div>
+
+          <div class="brand-item" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            <span>Prep Digitals</span>
+          </div>
+
+          <div class="brand-item" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="4"/>
+              <path d="M3 9h18M9 21V9"/>
+            </svg>
+            <span>Condosales</span>
+          </div>
+
+          <div class="brand-item" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            <span>Sixth &amp; Rio</span>
+          </div>
         </div>
       </div>
     </div>
@@ -2705,64 +3027,52 @@
       </div>
     </section>
 
-    <!-- Project Showcase Grid: Row 1 -->
-    <section class="showcase-grid" id="projects">
-      <a href="https://github.com/MusfiqurRahman12/ai-test-case-generator" target="_blank" rel="noopener noreferrer" class="showcase-card">
-        <img src="assets/card-ai.webp" onerror="this.onerror=null;this.src='assets/card-ai.jpg'" alt="AI Test Case Generator with Trello, Jira and ClickUp Sync" loading="lazy">
-        <div class="card-caption">
-          <span class="card-tag">AI & QA Tool</span>
-          <h3 class="card-title">AI Test Case Generator</h3>
-          <p class="card-desc">AI-powered test generation with Trello, Jira & ClickUp sync</p>
+    <!-- Interactive Shuffling Projects Gallery -->
+    <section class="projects-gallery-section" id="projects">
+      <div class="projects-gallery-header">
+        <div class="section-header" style="margin-bottom: 0;">
+          <span class="section-tag">Featured Innovations &amp; Case Studies</span>
+          <h2 class="section-title">Selected Projects</h2>
+          <p class="section-subtitle">Real-world AI test pipelines, enterprise security plugins, and high-performance automation platforms.</p>
         </div>
-      </a>
 
-      <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="showcase-card">
-        <img src="assets/card-security.webp" onerror="this.onerror=null;this.src='assets/card-security.jpg'" alt="Accelvia Content Protection WordPress Plugin" loading="lazy">
-        <div class="card-caption">
-          <span class="card-tag">WordPress Plugin</span>
-          <h3 class="card-title">Accelvia Protection</h3>
-          <p class="card-desc">Security plugin protecting source code & digital content</p>
-        </div>
-      </a>
+        <div class="projects-gallery-controls">
+          <div class="gallery-filter-tabs" id="project-filters">
+            <button class="filter-tab active" data-filter="all">
+              <span>All Work</span>
+              <span class="filter-count" id="count-all">6</span>
+            </button>
+            <button class="filter-tab" data-filter="ai-qa">
+              <span>AI &amp; Automation</span>
+              <span class="filter-count" id="count-ai">2</span>
+            </button>
+            <button class="filter-tab" data-filter="wordpress">
+              <span>WordPress</span>
+              <span class="filter-count" id="count-wp">2</span>
+            </button>
+            <button class="filter-tab" data-filter="enterprise-qa">
+              <span>Performance &amp; QA</span>
+              <span class="filter-count" id="count-qa">2</span>
+            </button>
+          </div>
 
-      <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="showcase-card">
-        <img src="assets/card-medical.webp" onerror="this.onerror=null;this.src='assets/card-medical.jpg'" alt="Surgery South Patient Management Automation" loading="lazy">
-        <div class="card-caption">
-          <span class="card-tag">E2E Automation</span>
-          <h3 class="card-title">Surgery South</h3>
-          <p class="card-desc">Automated test suite with Playwright & Selenium</p>
+          <button class="gallery-shuffle-btn" id="gallery-shuffle-btn" type="button" title="Shuffle projects order">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 3 21 3 21 8"></polyline>
+              <line x1="4" y1="20" x2="21" y2="3"></line>
+              <polyline points="21 16 21 21 16 21"></polyline>
+              <line x1="15" y1="15" x2="21" y2="21"></line>
+              <line x1="4" y1="4" x2="9" y2="9"></line>
+            </svg>
+            <span>Shuffle</span>
+          </button>
         </div>
-      </a>
-    </section>
+      </div>
 
-    <!-- Project Showcase Grid: Row 2 (More Selected Work) -->
-    <section class="showcase-grid" style="margin-top: 0; margin-bottom: 120px;">
-      <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="showcase-card">
-        <img src="assets/card-condosales.webp" onerror="this.onerror=null;this.src='assets/card-condosales.jpg'" alt="Condosales Real Estate API & Load Testing" loading="lazy">
-        <div class="card-caption">
-          <span class="card-tag">API & Performance QA</span>
-          <h3 class="card-title">Condosales Platform</h3>
-          <p class="card-desc">Postman, RestAssured & JMeter concurrent load benchmarks</p>
-        </div>
-      </a>
-
-      <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="showcase-card">
-        <img src="assets/card-sixthrio.webp" onerror="this.onerror=null;this.src='assets/card-sixthrio.jpg'" alt="Sixth & Rio Luxury Residential Platform QA" loading="lazy">
-        <div class="card-caption">
-          <span class="card-tag">Pixel-Perfect QA</span>
-          <h3 class="card-title">Sixth & Rio Platform</h3>
-          <p class="card-desc">Comprehensive cross-browser, mobile & layout regression testing</p>
-        </div>
-      </a>
-
-      <a href="https://github.com/MusfiqurRahman12" target="_blank" rel="noopener noreferrer" class="showcase-card">
-        <img src="assets/card-cta.webp" onerror="this.onerror=null;this.src='assets/card-cta.jpg'" alt="Accelvia CTA Builder WordPress Plugin" loading="lazy">
-        <div class="card-caption">
-          <span class="card-tag">WordPress Plugin</span>
-          <h3 class="card-title">Accelvia CTA Builder</h3>
-          <p class="card-desc">Dynamic call-to-action banners & high-conversion UI buttons</p>
-        </div>
-      </a>
+      <!-- The Interactive Gallery Grid -->
+      <div class="projects-gallery-grid" id="projects-gallery-grid">
+        <!-- Cards dynamically hydrated from Sanity with uploaded assets -->
+      </div>
     </section>
 
     <!-- Professional Experience Timeline -->
@@ -3357,5 +3667,7 @@
       renderLoop();
     })();
   </script>
+  <!-- Sanity.io Headless CMS Client & Hydration -->
+  <script src="sanity-client.js"></script>
 </body>
 </html>
