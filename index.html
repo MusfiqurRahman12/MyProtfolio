@@ -1238,13 +1238,13 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
       color: #ffffff;
       border-radius: 999px;
-      padding: 9px 18px;
+      padding: 8px 16px;
       font-size: 13px;
       font-weight: 600;
       font-family: inherit;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
       cursor: pointer;
       transition: all 0.25s ease;
     }
@@ -1264,12 +1264,161 @@
       transform: rotate(180deg);
     }
 
-    /* Grid Layout */
+    /* Slider Navigation Controls (Prev / Next & Progress) */
+    .gallery-nav-group {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(18, 18, 18, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      padding: 3px 5px;
+      gap: 3px;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-nav-btn {
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .gallery-nav-btn:hover:not(:disabled) {
+      background: rgba(255, 94, 58, 0.2);
+      color: var(--accent);
+      transform: scale(1.08);
+    }
+
+    .gallery-nav-btn:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+    }
+
+    .gallery-progress-badge {
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #ffffff;
+      padding: 0 8px;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      user-select: none;
+    }
+
+    #gallery-current-idx {
+      color: var(--accent);
+    }
+
+    .gallery-progress-sep {
+      opacity: 0.4;
+      font-weight: 400;
+    }
+
+    /* View Switcher Toggle (Slider vs Grid) */
+    .gallery-view-toggle {
+      display: inline-flex;
+      background: rgba(18, 18, 18, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .view-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .view-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .view-btn.active {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Primary Gallery Modes: Slider vs Grid */
     .projects-gallery-grid {
+      transition: all 0.4s ease;
+    }
+
+    /* SLIDER MODE (Default: Ultra-compact, single row footprint) */
+    .projects-gallery-section.is-slider-view .projects-gallery-grid {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      gap: 24px;
+      padding: 10px 4px 24px 4px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      cursor: grab;
+    }
+
+    .projects-gallery-section.is-slider-view .projects-gallery-grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .projects-gallery-section.is-slider-view .projects-gallery-grid:active {
+      cursor: grabbing;
+    }
+
+    .projects-gallery-section.is-slider-view .gallery-card {
+      flex: 0 0 calc((100% - 48px) / 3);
+      min-width: 320px;
+      max-width: 440px;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+    }
+
+    /* GRID MODE (Intelligent Bento Layout: Balances 7 items seamlessly) */
+    .projects-gallery-section.is-grid-view .gallery-nav-group {
+      display: none !important;
+    }
+
+    .projects-gallery-section.is-grid-view .projects-gallery-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      transition: all 0.4s ease;
+      padding: 10px 4px 24px 4px;
+    }
+
+    .projects-gallery-section.is-grid-view .gallery-card:first-child {
+      grid-column: span 2;
+    }
+
+    .projects-gallery-section.is-grid-view .gallery-card:last-child {
+      grid-column: span 2;
     }
 
     .gallery-card {
@@ -1853,9 +2002,17 @@
       .brands-track {
         gap: 36px;
       }
-      .projects-gallery-grid {
+      .projects-gallery-section.is-slider-view .gallery-card {
+        flex: 0 0 calc((100% - 20px) / 2);
+        min-width: 290px;
+      }
+      .projects-gallery-section.is-grid-view .projects-gallery-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
+      }
+      .projects-gallery-section.is-grid-view .gallery-card:first-child,
+      .projects-gallery-section.is-grid-view .gallery-card:last-child {
+        grid-column: span 1;
       }
       .services-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -2149,10 +2306,17 @@
       }
 
       /* Projects Gallery Grid */
-      .projects-gallery-grid {
+      .projects-gallery-section.is-slider-view .gallery-card {
+        flex: 0 0 100%;
+        min-width: 100%;
+      }
+      .projects-gallery-section.is-grid-view .projects-gallery-grid {
         grid-template-columns: 1fr;
         gap: 18px;
-        margin: 20px 0 36px 0;
+      }
+      .projects-gallery-section.is-grid-view .gallery-card:first-child,
+      .projects-gallery-section.is-grid-view .gallery-card:last-child {
+        grid-column: span 1;
       }
       .gallery-filter-tabs {
         flex-wrap: wrap;
@@ -3028,7 +3192,7 @@
     </section>
 
     <!-- Interactive Shuffling Projects Gallery -->
-    <section class="projects-gallery-section" id="projects">
+    <section class="projects-gallery-section is-slider-view" id="projects">
       <div class="projects-gallery-header">
         <div class="section-header" style="margin-bottom: 0;">
           <span class="section-tag">Featured Innovations &amp; Case Studies</span>
@@ -3037,10 +3201,11 @@
         </div>
 
         <div class="projects-gallery-controls">
+          <!-- Category Filter Tabs -->
           <div class="gallery-filter-tabs" id="project-filters">
             <button class="filter-tab active" data-filter="all">
               <span>All Work</span>
-              <span class="filter-count" id="count-all">6</span>
+              <span class="filter-count" id="count-all">7</span>
             </button>
             <button class="filter-tab" data-filter="ai-qa">
               <span>AI &amp; Automation</span>
@@ -3048,7 +3213,7 @@
             </button>
             <button class="filter-tab" data-filter="wordpress">
               <span>WordPress</span>
-              <span class="filter-count" id="count-wp">2</span>
+              <span class="filter-count" id="count-wp">3</span>
             </button>
             <button class="filter-tab" data-filter="enterprise-qa">
               <span>Performance &amp; QA</span>
@@ -3056,8 +3221,49 @@
             </button>
           </div>
 
+          <!-- Slider Navigation Arrows & Progress Badge -->
+          <div class="gallery-nav-group" id="gallery-nav-group" role="group" aria-label="Slider navigation">
+            <button class="gallery-nav-btn prev" id="gallery-prev-btn" type="button" title="Previous projects" aria-label="Previous">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="gallery-progress-badge" id="gallery-progress-badge" title="Active project index">
+              <span id="gallery-current-idx">01</span>
+              <span class="gallery-progress-sep">/</span>
+              <span id="gallery-total-idx">07</span>
+            </div>
+            <button class="gallery-nav-btn next" id="gallery-next-btn" type="button" title="Next projects" aria-label="Next">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Dual-View Switcher (Slider vs Bento Grid) -->
+          <div class="gallery-view-toggle" id="gallery-view-toggle" role="group" aria-label="Layout view switcher">
+            <button class="view-btn active" data-view="slider" id="btn-view-slider" type="button" title="Single-Row Slider View">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="10" rx="2"/>
+                <line x1="8" y1="7" x2="8" y2="17"/>
+                <line x1="16" y1="7" x2="16" y2="17"/>
+              </svg>
+              <span>Slider</span>
+            </button>
+            <button class="view-btn" data-view="grid" id="btn-view-grid" type="button" title="Bento Grid View">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+              </svg>
+              <span>Grid</span>
+            </button>
+          </div>
+
+          <!-- Dynamic Shuffle Button -->
           <button class="gallery-shuffle-btn" id="gallery-shuffle-btn" type="button" title="Shuffle projects order">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="16 3 21 3 21 8"></polyline>
               <line x1="4" y1="20" x2="21" y2="3"></line>
               <polyline points="21 16 21 21 16 21"></polyline>

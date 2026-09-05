@@ -335,6 +335,119 @@
     const countQaEl = document.getElementById('count-qa');
     if (countQaEl) countQaEl.textContent = qaCount;
 
+    const sectionEl = document.getElementById('projects');
+    const prevBtn = document.getElementById('gallery-prev-btn');
+    const nextBtn = document.getElementById('gallery-next-btn');
+    const currentIdxEl = document.getElementById('gallery-current-idx');
+    const totalIdxEl = document.getElementById('gallery-total-idx');
+
+    function getScrollStep() {
+      const visible = cards.filter(c => !c.classList.contains('is-hidden'));
+      if (visible.length > 0) {
+        return visible[0].offsetWidth + 24;
+      }
+      return 360;
+    }
+
+    function updateSliderNav() {
+      if (!sectionEl || !sectionEl.classList.contains('is-slider-view')) return;
+      const visible = cards.filter(c => !c.classList.contains('is-hidden'));
+      const count = visible.length;
+      if (totalIdxEl) totalIdxEl.textContent = String(count).padStart(2, '0');
+
+      const scrollLeft = grid.scrollLeft;
+      const maxScroll = Math.max(0, grid.scrollWidth - grid.clientWidth);
+
+      if (prevBtn) prevBtn.disabled = scrollLeft <= 8;
+      if (nextBtn) nextBtn.disabled = scrollLeft >= maxScroll - 8 || maxScroll <= 5;
+
+      const step = getScrollStep();
+      const activeIdx = Math.min(count, Math.max(1, Math.round(scrollLeft / step) + 1));
+      if (currentIdxEl) currentIdxEl.textContent = String(activeIdx).padStart(2, '0');
+    }
+
+    // Scroll event listener for smooth slider progress updates
+    grid.addEventListener('scroll', () => {
+      requestAnimationFrame(updateSliderNav);
+    }, { passive: true });
+
+    // Slider Prev / Next buttons
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        grid.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        grid.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+      });
+    }
+
+    // Interactive Drag-to-Scroll on Desktop
+    let isDown = false;
+    let startX = 0;
+    let scrollLeftStart = 0;
+    let hasDragged = false;
+
+    grid.addEventListener('pointerdown', (e) => {
+      if (!sectionEl || !sectionEl.classList.contains('is-slider-view')) return;
+      if (e.target.closest('a') || e.target.closest('button')) return;
+      isDown = true;
+      hasDragged = false;
+      startX = e.pageX - grid.offsetLeft;
+      scrollLeftStart = grid.scrollLeft;
+      grid.style.cursor = 'grabbing';
+      grid.style.scrollBehavior = 'auto';
+    });
+
+    const stopDragging = () => {
+      if (!isDown) return;
+      isDown = false;
+      grid.style.cursor = '';
+      grid.style.scrollBehavior = 'smooth';
+      setTimeout(() => { hasDragged = false; }, 50);
+    };
+
+    grid.addEventListener('pointerleave', stopDragging);
+    grid.addEventListener('pointerup', stopDragging);
+
+    grid.addEventListener('pointermove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - grid.offsetLeft;
+      const walk = (x - startX) * 1.35;
+      if (Math.abs(walk) > 6) hasDragged = true;
+      grid.scrollLeft = scrollLeftStart - walk;
+    });
+
+    grid.addEventListener('click', (e) => {
+      if (hasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+
+    // View Switcher (Slider vs Bento Grid)
+    const viewButtons = document.querySelectorAll('#gallery-view-toggle .view-btn');
+    viewButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        viewButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const view = btn.dataset.view;
+        if (view === 'grid') {
+          sectionEl.classList.remove('is-slider-view');
+          sectionEl.classList.add('is-grid-view');
+        } else {
+          sectionEl.classList.remove('is-grid-view');
+          sectionEl.classList.add('is-slider-view');
+          grid.scrollLeft = 0;
+          setTimeout(updateSliderNav, 100);
+        }
+      });
+    });
+
     // Attach interactive filter tabs
     const filterTabs = document.querySelectorAll('#project-filters .filter-tab');
     filterTabs.forEach(tab => {
@@ -357,6 +470,10 @@
             }
             card.classList.remove('is-shuffling');
           });
+
+          // Reset slider scroll position to first card on filter change
+          grid.scrollLeft = 0;
+          updateSliderNav();
         }, 160);
       });
     });
@@ -376,9 +493,14 @@
             parent.appendChild(visibleCards[j]);
           }
           cards.forEach(c => c.classList.remove('is-shuffling'));
+          grid.scrollLeft = 0;
+          updateSliderNav();
         }, 200);
       });
     }
+
+    // Initial slider navigation state check
+    setTimeout(updateSliderNav, 200);
   }
 
   /**
