@@ -75,12 +75,26 @@
     if (Array.isArray(settings.roles) && settings.roles.length > 0) {
       const rotatorEl = document.querySelector('.title-rotator');
       if (rotatorEl) {
+        function formatRoleTitle(role) {
+          if (!role) return '';
+          if (role.includes('<br>')) return role;
+          const words = role.trim().split(/\s+/);
+          if (words.length <= 1) return role;
+          if (words.length === 2) return `${words[0]}<br>${words[1]}`;
+          const lastWord = words.pop();
+          return `${words.join(' ')}<br>${lastWord}`;
+        }
+
         rotatorEl.innerHTML = settings.roles
           .map((role, idx) => {
-            const formatted = role.replace(' ', '<br>');
+            const formatted = formatRoleTitle(role);
             return `<span class="title-item ${idx === 0 ? 'active' : ''}">${formatted}</span>`;
           })
           .join('');
+
+        if (typeof window.initTitleRotator === 'function') {
+          window.initTitleRotator();
+        }
       }
     }
 

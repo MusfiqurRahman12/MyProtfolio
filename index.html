@@ -501,6 +501,9 @@
       color: var(--text-muted);
       margin-bottom: 12px;
       letter-spacing: -0.01em;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: heroFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
     }
 
     .hero-left-col .main-title {
@@ -510,32 +513,49 @@
       letter-spacing: -0.04em;
       color: #ffffff;
       text-transform: capitalize;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: heroFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.35s;
     }
 
     .title-rotator {
       position: relative;
-      display: inline-block;
+      display: inline-grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
       min-height: 1.95em;
       width: 100%;
+      vertical-align: top;
     }
 
     .title-item {
+      grid-area: 1 / 1 / 2 / 2;
       display: block;
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-      position: absolute;
-      top: 0;
-      left: 0;
+      transform: translateY(28px);
+      filter: blur(4px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
       pointer-events: none;
       white-space: nowrap;
+      will-change: transform, opacity, filter;
     }
 
     .title-item.active {
       opacity: 1;
       transform: translateY(0);
+      filter: blur(0px);
       pointer-events: auto;
-      position: relative;
+      z-index: 2;
+    }
+
+    .title-item.exit {
+      opacity: 0;
+      transform: translateY(-28px);
+      filter: blur(4px);
+      pointer-events: none;
+      z-index: 1;
     }
 
     .hero-dual-tags {
@@ -544,6 +564,9 @@
       gap: 10px;
       margin-top: 18px;
       flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: heroFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
     }
 
     .hero-mini-tag {
@@ -551,11 +574,29 @@
       font-weight: 600;
       color: var(--text-muted);
       letter-spacing: 0.02em;
+      transition: color 0.4s ease, transform 0.4s ease, text-shadow 0.4s ease;
+    }
+
+    .hero-mini-tag.active {
+      color: #FFFFFF;
+      text-shadow: 0 0 10px rgba(255, 94, 58, 0.6);
+      transform: translateY(-1px);
     }
 
     .hero-mini-dot {
       color: var(--accent);
       font-weight: 700;
+    }
+
+    @keyframes heroFadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .hero-right-col {
@@ -3853,17 +3894,71 @@
         }, 1500);
       }
 
-      // Dynamic Title Rotator between SQA Engineer & AI Solution Architect
-      (function setupTitleRotator() {
-        const items = document.querySelectorAll('.title-item');
+      // Dynamic Title Rotator between SQA Engineer, AI Solution Architect & QA Consultant
+      window.initTitleRotator = function setupTitleRotator() {
+        if (window._titleRotatorInterval) {
+          clearInterval(window._titleRotatorInterval);
+          window._titleRotatorInterval = null;
+        }
+
+        const rotator = document.querySelector('.title-rotator');
+        if (!rotator) return;
+        const items = Array.from(rotator.querySelectorAll('.title-item'));
         if (items.length < 2) return;
-        let activeIdx = 0;
-        setInterval(() => {
-          items[activeIdx].classList.remove('active');
-          activeIdx = (activeIdx + 1) % items.length;
-          items[activeIdx].classList.add('active');
+
+        const miniTags = Array.from(document.querySelectorAll('.hero-dual-tags .hero-mini-tag'));
+
+        let activeIdx = items.findIndex(item => item.classList.contains('active'));
+        if (activeIdx === -1) {
+          activeIdx = 0;
+          items[0].classList.add('active');
+        }
+
+        function updateActive(newIdx) {
+          const current = items[activeIdx];
+          const next = items[newIdx];
+
+          // Current item exits smoothly upwards
+          current.classList.remove('active');
+          current.classList.add('exit');
+          setTimeout(() => {
+            current.classList.remove('exit');
+          }, 800);
+
+          // Next item enters smoothly from below
+          next.classList.remove('exit');
+          next.classList.add('active');
+
+          // Highlight corresponding mini tag
+          if (miniTags.length > 0) {
+            miniTags.forEach((tag, idx) => {
+              if (idx === newIdx) {
+                tag.classList.add('active');
+              } else {
+                tag.classList.remove('active');
+              }
+            });
+          }
+
+          activeIdx = newIdx;
+        }
+
+        // Highlight initial mini tag
+        if (miniTags.length > 0 && miniTags[activeIdx]) {
+          miniTags.forEach((tag, idx) => {
+            if (idx === activeIdx) tag.classList.add('active');
+            else tag.classList.remove('active');
+          });
+        }
+
+        window._titleRotatorInterval = setInterval(() => {
+          const nextIdx = (activeIdx + 1) % items.length;
+          updateActive(nextIdx);
         }, 3400);
-      })();
+      };
+
+      // Start initial rotation immediately
+      window.initTitleRotator();
 
       // Mobile Navigation Drawer Interactive Logic
       (function setupMobileNav() {
