@@ -2086,56 +2086,95 @@
         height: 24px;
       }
 
-      /* Hero Section */
+      /* Ambient Dynamic Mobile Overlay: Clear face in upper viewport, smooth dark fade below chin */
+      #ambient-overlay {
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.45) 0%,
+          rgba(0, 0, 0, 0.05) 12%,
+          rgba(0, 0, 0, 0.02) 26%,
+          rgba(0, 0, 0, 0.22) 42%,
+          rgba(0, 0, 0, 0.76) 56%,
+          rgba(0, 0, 0, 0.94) 74%,
+          #000000 100%
+        );
+      }
+
+      /* Hero Section: Compact, bottom-anchored elegant stack */
       .hero-section {
-        min-height: calc(100svh - 76px);
-        padding-top: 36px;
-        padding-bottom: 32px;
-        gap: 32px;
+        min-height: calc(100svh - 72px);
+        padding-top: 16px;
+        padding-bottom: 20px;
+        gap: 14px;
+        justify-content: flex-end;
+      }
+      .hero-top-grid {
+        gap: 12px;
       }
       .hero-left-col .salutation {
-        font-size: 15px;
-        margin-bottom: 6px;
+        font-size: 13px;
+        margin-bottom: 4px;
+        letter-spacing: 0.02em;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
       }
       .hero-left-col .main-title {
-        font-size: clamp(36px, 9.2vw, 52px);
-        line-height: 1.05;
+        font-size: clamp(28px, 7.8vw, 38px);
+        line-height: 1.04;
         letter-spacing: -0.035em;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
       }
       .title-rotator {
-        min-height: 2.15em;
+        min-height: 2.12em;
       }
       .title-item {
         white-space: normal;
       }
       .hero-dual-tags {
-        gap: 6px 8px;
-        margin-top: 14px;
+        gap: 4px 6px;
+        margin-top: 8px;
       }
       .hero-mini-tag {
-        font-size: 11.5px;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.75);
+      }
+      .hero-right-col {
+        padding-left: 0;
+        margin-top: 0;
       }
       .hero-right-col .philosophy-title {
-        font-size: 20px;
-        line-height: 1.35;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.3;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
       }
       .hero-right-col .philosophy-desc {
-        font-size: 14px;
-        line-height: 1.55;
-        margin-top: 10px;
+        font-size: 12.5px;
+        line-height: 1.45;
+        margin-top: 4px;
+        color: rgba(255, 255, 255, 0.65);
       }
       .hero-services-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-        padding-top: 24px;
+        gap: 8px 10px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .service-item {
+        padding: 6px 10px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 10px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
       }
       .service-item .service-num {
-        font-size: 11px;
-        margin-bottom: 4px;
+        font-size: 10px;
+        margin-bottom: 2px;
+        color: var(--accent);
       }
       .service-item .service-title {
-        font-size: 13.5px;
-        line-height: 1.35;
+        font-size: 11.5px;
+        line-height: 1.25;
       }
 
       /* Brands Banner */
@@ -2476,8 +2515,16 @@
         padding: 0 16px;
       }
       .hero-services-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px 8px;
+        padding-top: 10px;
+      }
+      .service-item {
+        padding: 5px 8px;
+      }
+      .service-item .service-title {
+        font-size: 10.5px;
+        line-height: 1.2;
       }
       .impact-stats-grid {
         grid-template-columns: 1fr;
@@ -3692,10 +3739,20 @@
           renderX = 0;
           renderY = (canvasH - renderH) / 2;
         } else {
-          renderH = canvasH;
-          renderW = canvasH * imgRatio;
-          renderX = (canvasW - renderW) / 2;
-          renderY = 0;
+          // Portrait mobile / vertical viewport
+          if (canvasRatio < 0.75) {
+            // Subtle framing lift so facial features remain prominent and clear of bottom text
+            const mobileScale = 1.04;
+            renderH = canvasH * mobileScale;
+            renderW = renderH * imgRatio;
+            renderX = (canvasW - renderW) / 2;
+            renderY = -canvasH * 0.025; // Gentle upward lift for facial breathing space
+          } else {
+            renderH = canvasH;
+            renderW = canvasH * imgRatio;
+            renderX = (canvasW - renderW) / 2;
+            renderY = 0;
+          }
         }
 
         ctx.fillStyle = '#000000';
